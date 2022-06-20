@@ -11,7 +11,6 @@ class CCmd(object):
 
     def __init__(self, client):
         self.cmd_client = client
-#       self.cmd_list = ''
         self.cmd_result = ''
         self.cmd_err = ''
         self.__SUDO_PASS = ''
@@ -54,7 +53,7 @@ class CCmd(object):
         ## Trasformación del comando SUDO
         if not self.__SUDO_PASS:
             self.__SUDO_PASS = getpass('Enter your Sudo Password: ')
-        prev = 'echo %s | ' %self.__SUDO_PASS
+        prev = 'echo "%s" | ' %self.__SUDO_PASS
         cmd = __sudoCmd.replace("sudo", "sudo -S")
         COMMAND = prev+cmd
         self.__exec_cmd(COMMAND)

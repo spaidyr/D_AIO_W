@@ -8,6 +8,7 @@ class ClientSSH ():
 
     def __clientSSH__(HOST):
         try:
+            print('flag_01')
             client = ClientSSH.__ssh_client(HOST)
             cmd = CCmd(client)
             return client, cmd

@@ -1,12 +1,13 @@
 from clientCCmd.ClientSSH import ClientSSH
 
-if __name__ == 'main':
 
-    HOST = '192.168.44.130'
+if __name__ == '__main__':
 
+    HOST='192.168.78.65'
+    
     client, cmd = ClientSSH.__clientSSH__(HOST)
 
-    COMMANDS = ['ls -l']
+    COMMANDS = ['sudo whoami','ls -l']
     ClientSSH.__run__(cmd, COMMANDS)
 
     ClientSSH.__clientSSHclose__(client)
