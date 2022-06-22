@@ -1,0 +1,59 @@
+/var/log/message		-> info sobre servicios corriendo
+/var/log/secure			-> quien se conectó, cuándo y cómo
+
+<--- Audit --->
+HORA, COMANDOS QUE SE EJECUTARON, QUIEN LO EJECUTÓ   (qué se hizo y quién lo hizo, pero no te dice que cambió, si no qué ejecuto)
+	
+	yum install audit audit-libs
+	auditctl -l
+	<-- crear una regla temporal audit -->
+	auditctl -w /etc/ -p awx -k etc_modify
+	<-- crear una regla permanente -->
+	auditd -l > /etc/audit/rules.d/audit.rules
+	auditctl -R /etc/audit/rules.d/audit.rules	
+	tail -f /var/log/audit/audit.log	
+
+	https://github.com/Neo23x0/auditd
+
+	vi /var/ossec/etc/ossec.conf		- en el ossec.conf del equipo a auditar
+
+<--- Aide --->
+Sí te dice qé se cambió
+
+	yum install aide
+	aide -i			(inicializar la base de datos)  -puede tardar un par de dias
+	mv /var/lib/aide.db.new.gz /var/lib/aide.db.gz		-renombramos la BBDD
+	vi /etc/aide.conf
+		FIPSR -> variable que define lo que se está monitoreando
+		existen diferentes variables que monitorean
+
+<-- Ejemplo -->
+useradd holaquease
+passwd holaquease
+
+aide --check				- podemos ver lo que archivos se cambiaron en base a los hashes
+auditctl -l
+ausearch -i -k etc_modify		- podemos ver qué pasó, quién fue, que ejecutó exactamente
+ausearch -i -a 2151			- si son comandos muy largos se puede buscar por id (esta detras de la hora)
+
+https://red-orbita.com/?p=9101&utm_source=rss&utm_medium=rss&utm_campaign=integrar-auditd-con-wazuh
+
+
+<-- who-data in windows -->
+
+https://wazuh.com/blog/how-to-monitor-folder-access-on-windows/
+
+<localfile>
+    <location>Security</location>
+    <log_format>eventchannel</log_format>
+    <query>Event/System[EventID != 5145 and EventID != 5156 and EventID != 5447 and
+      EventID != 4656 and EventID != 4658 and EventID != 4660 and
+      EventID != 4670 and EventID != 4690 and EventID != 4703 and EventID != 4907 and
+      EventID != 5152 and EventID != 5157]</query>
+  </localfile>
+
+<syscheck>
+  <directories check_all="yes" whodata="yes">C:\Windows\System32\drivers\etc</directories>
+</syscheck>
+
+https://documentation.wazuh.com/4.2/user-manual/capabilities/auditing-whodata/who-windows-policies.html#who-windows-policies

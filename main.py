@@ -4,7 +4,8 @@ from app.test_app import Test_App
 
 if __name__ == '__main__':
 
-    HOST='192.168.78.65'
+#    HOST='192.168.78.65'
+    HOST='192.168.1.140'
     
     client, cmd = ClientSSH.__clientSSH__(HOST)
     
