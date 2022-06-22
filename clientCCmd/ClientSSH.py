@@ -1,3 +1,6 @@
+from http import client
+from multiprocessing.dummy.connection import Client
+import threading
 import paramiko
 import sys, time
 from getpass import getpass
@@ -8,7 +11,6 @@ class ClientSSH ():
 
     def __clientSSH__(HOST):
         try:
-            print('flag_01')
             client = ClientSSH.__ssh_client(HOST)
             cmd = CCmd(client)
             return client, cmd
