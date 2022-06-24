@@ -1,4 +1,4 @@
-from first_config import First_config
+from app.first_config import First_config
 
 class App_Install:
     
