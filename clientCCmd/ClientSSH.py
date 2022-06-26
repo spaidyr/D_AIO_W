@@ -21,7 +21,7 @@ class ClientSSH ():
         client.close()
 
     def __run__(cmd, COMMANDS):
-        for command in COMMANDS:
+        for command in COMMANDS:            
             cmd.run_cmd(command)
             for line in cmd.get_cmd_result().splitlines():
                 print (line)

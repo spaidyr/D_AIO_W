@@ -26,8 +26,11 @@ class CCmd(object):
                 self.__sudo_cmd(user_cmd)
             else:
                 self.cmd_err = ''
+
                 stdin, stdout, stderr = self.cmd_client.exec_command(user_cmd)
+             
                 self.cmd_result = stdout.read()
+
                 self.cmd_err = stderr.read()
                 if self.cmd_err:
                     self.__SUDO_PASS = ''
