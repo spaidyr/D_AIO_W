@@ -1,4 +1,4 @@
-sudo yum update -y
+sudo yum update
 #curl -so ~/unattended-installation.sh https://packages.wazuh.com/resources/4.2/open-distro/unattended-installation/unattended-installation.sh && bash ~/unattended-installation.sh
 
 sudo yum install java-11-openjdk-devel
