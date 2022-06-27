@@ -12,3 +12,7 @@ class App_Install:
 ##    def first_configuration(self):
 ##        object = First_config()
 ##        return object
+
+    def test_command(self):
+        self.COMMANDS = ['sudo sh -c "echo "-Dlog4j2.formatMsgNoLookups=true" > /etc/elasticsearch/jvm.options.d/disabledlog4j.options"']
+        return self.COMMANDS

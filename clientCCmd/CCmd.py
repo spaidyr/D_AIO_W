@@ -28,12 +28,11 @@ class CCmd(object):
                 self.cmd_err = ''
 
                 stdin, stdout, stderr = self.cmd_client.exec_command(user_cmd)
-             
                 self.cmd_result = stdout.read()
-
                 self.cmd_err = stderr.read()
                 if self.cmd_err:
-                    self.__SUDO_PASS = ''
+                    if not ("[sudo] password for centos: ").encode() in self.cmd_err:
+                        self.__SUDO_PASS = ''
                     Exceptions.__cmdError__(self, user_cmd)                      
         except paramiko.PasswordRequiredException:
             print('Password requerida')

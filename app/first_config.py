@@ -4,11 +4,6 @@ class First_config():
         self.COMMANDS = ['']
         self.update = self.update_system()
         self.java = self.install_java()
-        self.testing = self.test_command()
-
-    def test_command(self):
-        self.COMMANDS = ['']
-        return self.COMMANDS
 
     def update_system(self):
         self.COMMANDS = ['sudo yum update -y']
@@ -25,6 +20,5 @@ class First_config():
         return self.COMMANDS
     
     def install_packages(self):
-        self.COMMANDS = ['sudo yum install curl unzip wget libcap',
-                        'sudo rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH']
+        self.COMMANDS = ['sudo yum install curl unzip wget libcap -y']
         return self.COMMANDS
