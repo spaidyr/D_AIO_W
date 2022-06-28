@@ -2,7 +2,7 @@
 #from platform import python_branch
 from app.app_install import App_Install
 from clientCCmd.ClientSSH import ClientSSH
-from local_settings import *
+from settings import *
 
 ## def progress_bar (progress, total, color=colorama.Fore.YELLOW):
 ##     percent = 100 * (progress / float(total))
@@ -31,14 +31,14 @@ if __name__ == '__main__':
 
 #    ClientSSH.__run__(cmd, module.test_command())
 
-
-
     ClientSSH.__run__(cmd, module.step1.update_system())
     ClientSSH.__run__(cmd, module.step1.install_java())
     ClientSSH.__run__(cmd, module.step1.install_packages())
-#    ClientSSH.__sftp_upload__(HOST,'/etc/yum.repos.d/wazuh.repo','./app/files/wazuh.repo')
 
     ClientSSH.__run__(cmd, module.step2.install_wazuh())
     ClientSSH.__run__(cmd, module.step2.install_elasticsearch())
+    ClientSSH.__run__(cmd, module.step2.install_filebeat())
+    ClientSSH.__run__(cmd, module.step2.install_kibana())
+    ClientSSH.__run__(cmd, module.step2.config_firewall())
 
     ClientSSH.__clientSSHclose__(client)
