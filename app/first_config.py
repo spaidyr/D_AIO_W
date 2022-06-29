@@ -1,3 +1,5 @@
+''' The class First_config initialize the basic configuration of the system '''
+
 class First_config():
     
     def __init__(self):

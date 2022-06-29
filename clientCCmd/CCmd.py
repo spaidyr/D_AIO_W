@@ -2,8 +2,6 @@ import paramiko
 import sys
 from getpass import getpass
 from clientCCmd.Exceptions import Exceptions
-#from socket.Exceptions import Exceptions
-#from paramiko.ssh_exception import AuthenticationException, ChannelException, PasswordRequiredException, SSHException
 
 class CCmd(object):
 

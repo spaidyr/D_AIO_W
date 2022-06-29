@@ -1,11 +1,7 @@
-from http import client
-from multiprocessing.dummy.connection import Client
-import threading
 import paramiko
 import sys, time
 from getpass import getpass
 from clientCCmd.CCmd import CCmd
-#from socket.CCmd import CCmd
 
 class ClientSSH ():
 

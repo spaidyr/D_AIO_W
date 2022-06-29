@@ -1,12 +1,13 @@
 from clientCCmd.ClientSSH import ClientSSH
-from settings import HOST
 from getpass import getpass
+
+''' The class Wazuh_Install load the configuration necesary for install Wazuh.
+    This object work in the Open Distro version of Elasticsearch '''
 
 class Wazuh_Install():
     
     def __init__(self):
         self.COMMANDS = ['']
-        ClientSSH.__sftp_upload__(HOST,'/etc/yum.repos.d/wazuh.repo','./app/files/wazuh.repo', pwd=getpass('Root Password: '))
 
     def install_wazuh(self):
         
@@ -83,3 +84,28 @@ class Wazuh_Install():
         self.COMMANDS = ['sudo firewall-cmd --add-service=https',
                         'sudo firewall-cmd --runtime-to-permanent']
         return self.COMMANDS
+    
+    def upload_files (self, HOST):
+        print (f"\n{'#'*10}   To install Wazuh is necessary upload some files   {'#'*10}\n")
+        print (f"\n{'#'*10}     Enter the password for the user root please     {'#'*10}\n")
+        print (f"\n{'#'*10}    Do you want upload the files to install Wazuh?   {'#'*10}\n")
+        while True:
+            result = input('To continue, you must write "yes" or "no": ').lower()
+            if (result == 'yes'):
+                check = True
+                break
+            elif (result == 'no'):
+                check = False
+                break
+            
+        if (check):
+            print (f"\n{'#'*10}      The files are going to upload to the server     {'#'*10}\n")
+            try:
+                ClientSSH.__sftp_upload__(HOST,'/etc/yum.repos.d/wazuh.repo','./app/files/wazuh.repo', pwd=getpass('Enter Root Password: '))
+            except:
+                print (f"\n{'#'*10} There was a problem and Wazuh won't be installed {'#'*10}\n")
+                check = False
+        if (not check):
+            print (f"\n{'#'*10}               Wazuh won't be installed               {'#'*10}\n")
+        
+        return check
