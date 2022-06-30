@@ -1,15 +1,28 @@
 from clientCCmd.ClientSSH import ClientSSH
 from getpass import getpass
 
-''' The class Wazuh_Install load the configuration necesary for install Wazuh.
-    This object work in the Open Distro version of Elasticsearch '''
-
 class Wazuh_Install():
+
+    ''' The class Wazuh_Install load the configuration necesary for install Wazuh.
+        This object work in the Open Distro version of Elasticsearch
+    '''
     
     def __init__(self):
+
+        ''' This function initialize de Object Wazuh_Install. This Object install and deploy the system Wazuh.
+            This object will install the version All-in-One of Wazuh-Manager.
+        '''
+
         self.COMMANDS = ['']
 
     def install_wazuh(self):
+
+        ''' This function install wazuh manager in the version 4.2. After of the installation, this function
+            reload and initialize the services.
+
+            Returns:
+                COMMANDS: List of commands in CentOS 7 wihich they are necessaries for install wazuh-manager
+        '''
         
         self.COMMANDS = ['sudo rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH',
                         'sudo yum install wazuh-manager-4.2.7-1 -y',
@@ -19,6 +32,15 @@ class Wazuh_Install():
         return self.COMMANDS
     
     def install_elasticsearch(self):
+
+        ''' This function install Elasticsearch in the version Open Distro for Wazuh. This process install Elasticsearch and
+            create the security certificates which they implement security about the web navegation. This certificates permit
+            that the plataform works in HTTPS.
+
+            Returns:
+                COMMANDS: List of commands in CentOS 7 wihich they are necessaries for install Elasticsearch.
+        '''
+
         self.COMMANDS = ['sudo yum install opendistroforelasticsearch-1.13.2-1 -y',
                         'sudo curl -so /etc/elasticsearch/elasticsearch.yml https://packages.wazuh.com/resources/4.2/open-distro/elasticsearch/7.x/elasticsearch_all_in_one.yml',
                         'sudo curl -so /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles.yml https://packages.wazuh.com/resources/4.2/open-distro/elasticsearch/roles/roles.yml',
@@ -48,6 +70,15 @@ class Wazuh_Install():
         return self.COMMANDS
 
     def install_filebeat (self):
+
+        ''' This function install Filebeat in the version 7.10 of Elasticsearch. Filebeat is necessary for wazuh works correctly.
+            This function take the certificates made in the function 'def install_elasticsearch()'. Filebeat wonn't work without
+            this certificates.
+
+            Returns:
+                COMMANDS: List of commands in CentOS 7 wihich they are necessaries for install Filebeat.
+        '''
+
         self.COMMANDS = ['sudo yum install filebeat-7.10.2-1 -y',
                         'sudo curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/resources/4.2/open-distro/filebeat/7.x/filebeat_all_in_one.yml',
                         'sudo curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/4.2/extensions/elasticsearch/7.x/wazuh-template.json',
@@ -64,6 +95,10 @@ class Wazuh_Install():
         return self.COMMANDS
     
     def install_kibana (self):
+
+        ''' Tis function install Kibana i the version 
+        '''
+
         self.COMMANDS = ['sudo yum install opendistroforelasticsearch-kibana -y',
                         'sudo curl -so /etc/kibana/kibana.yml https://packages.wazuh.com/resources/4.2/open-distro/kibana/7.x/kibana_all_in_one.yml',
                         'sudo mkdir /usr/share/kibana/data',
