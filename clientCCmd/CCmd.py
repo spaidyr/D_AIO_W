@@ -16,9 +16,10 @@ class CCmd(object):
     def __exec_cmd(self, user_cmd):
 
         if ("sudo -S") in user_cmd:
-            print(f"\n{'#'*10} Executing the Command {'#'*10}\n")
+            pass
+##            print(f"\n{'#'*10} Executing the Command {'#'*10}\n")
         else:
-            print(f"\n{'#'*10} Executing the Command: {user_cmd} {'#'*10}\n")
+            print(f"\n{'#'*10} Executing the Command: {user_cmd} {'#'*10}")
         try:
             if user_cmd.startswith('sudo '):
                 self.__sudo_cmd(user_cmd)

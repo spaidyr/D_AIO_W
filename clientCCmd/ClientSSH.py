@@ -21,15 +21,6 @@ class ClientSSH ():
             cmd.run_cmd(command)
             for line in cmd.get_cmd_result().splitlines():
                 print (line)
-
-    def __sftp_upload__(ip, remote_path, local_path, user='root', pwd='', port = int(22)):
- 
-        client = paramiko.Transport((ip,port))
-        client.connect(username=user,password=pwd)
-        sftp = paramiko.SFTPClient.from_transport(client)
-        # Use paramiko para cargar archivos al host remoto
-        sftp.put(local_path,remote_path)
-        client.close()
     
     def __ssh_client(HOST):
 

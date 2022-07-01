@@ -23,7 +23,6 @@ class Wazuh_Install():
             Returns:
                 COMMANDS: List of commands in CentOS 7 wihich they are necessaries for install wazuh-manager
         '''
-        
         self.COMMANDS = ['sudo rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH',
                         'sudo yum install wazuh-manager-4.2.7-1 -y',
                         'sudo systemctl daemon-reload',
@@ -119,28 +118,17 @@ class Wazuh_Install():
         self.COMMANDS = ['sudo firewall-cmd --add-service=https',
                         'sudo firewall-cmd --runtime-to-permanent']
         return self.COMMANDS
-    
-    def upload_files (self, HOST):
-        print (f"\n{'#'*10}   To install Wazuh is necessary upload some files   {'#'*10}\n")
-        print (f"\n{'#'*10}     Enter the password for the user root please     {'#'*10}\n")
-        print (f"\n{'#'*10}    Do you want upload the files to install Wazuh?   {'#'*10}\n")
-        while True:
-            result = input('To continue, you must write "yes" or "no": ').lower()
-            if (result == 'yes'):
-                check = True
-                break
-            elif (result == 'no'):
-                check = False
-                break
-            
-        if (check):
-            print (f"\n{'#'*10}      The files are going to upload to the server     {'#'*10}\n")
-            try:
-                ClientSSH.__sftp_upload__(HOST,'/etc/yum.repos.d/wazuh.repo','./app/files/wazuh.repo', pwd=getpass('Enter Root Password: '))
-            except:
-                print (f"\n{'#'*10} There was a problem and Wazuh won't be installed {'#'*10}\n")
-                check = False
-        if (not check):
-            print (f"\n{'#'*10}               Wazuh won't be installed               {'#'*10}\n")
-        
-        return check
+
+    def repo_wazuh (self):
+        self.COMMANDS = ['touch wazuh.repo',
+                        'echo "[wazuh]" >> wazuh.repo',
+                        'echo "gpgcheck=1" >> wazuh.repo',
+                        'echo "gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH" >> wazuh.repo',
+                        'echo "enabled=1" >> wazuh.repo',
+                        'echo "name=EL-\$releasever - Wazuh" >> wazuh.repo',
+                        'echo "baseurl=https://packages.wazuh.com/4.x/yum/" >> wazuh.repo',
+                        'echo "protect=1" >> wazuh.repo',
+                        'sudo chown root:root wazuh.repo',
+                        'sudo mv wazuh.repo /etc/yum.repos.d/',
+                        'sudo chmod 644 /etc/yum.repos.d/wazuh.repo']
+        return self.COMMANDS
