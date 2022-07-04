@@ -5,7 +5,7 @@ from clientCCmd.Exceptions import Exceptions
 
 class CCmd(object):
 
-    ## Clase de comando de ejecución remota
+    ## Clase for command execution
 
     def __init__(self, client):
         self.cmd_client = client
@@ -17,7 +17,6 @@ class CCmd(object):
 
         if ("sudo -S") in user_cmd:
             pass
-##            print(f"\n{'#'*10} Executing the Command {'#'*10}\n")
         else:
             print(f"\n{'#'*10} Executing the Command: {user_cmd} {'#'*10}")
         try:
@@ -37,12 +36,10 @@ class CCmd(object):
             print('Password requerida')
             
     def get_cmd_result(self):
-        ## Devolvemos el resultado de la ejecución del comando
         return self.cmd_result
 
     def run_cmd(self, __cmd):
 
-        ## Ejecutamos el comando
         if len(__cmd):
             self.__exec_cmd(__cmd)
         else:
@@ -51,7 +48,6 @@ class CCmd(object):
 
     def __sudo_cmd(self, __sudoCmd):
 
-        ## Trasformación del comando SUDO
         if not self.__SUDO_PASS:
             self.__SUDO_PASS = getpass('Enter your Sudo Password: ')
         prev = 'echo "%s" | ' %self.__SUDO_PASS

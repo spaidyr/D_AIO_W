@@ -1,5 +1,6 @@
 
 class Exceptions():
+
     def __cmdError__(self, user_cmd):
         if ('incorrect password attempt').encode() in self.cmd_err:
             for line in self.cmd_err.splitlines():
@@ -11,7 +12,6 @@ class Exceptions():
             print(f"{'#'*16} Unresolvable Error  {'#'*16}")
             for line in self.cmd_err.splitlines():
                 print (line)
-#                self.cmd_client.close()
 
     def __incorectPassword(self, user_cmd):
         start = user_cmd.find("-S")
