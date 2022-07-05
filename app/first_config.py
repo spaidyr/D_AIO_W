@@ -8,8 +8,6 @@ class First_config():
         '''
 
         self.COMMANDS = ['']
-        self.update = self.update_system()
-        self.java = self.install_java()
 
     def update_system(self):
 
