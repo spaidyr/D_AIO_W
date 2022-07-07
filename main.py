@@ -4,7 +4,7 @@ import webbrowser
 
 HOST = '127.0.0.1'
 
-def ask():
+def __ask():
     result = True
     answer = input('Enter your answer: ').lower()
     while (answer != 'yes' and answer != '' and answer != 'no'):
@@ -13,24 +13,24 @@ def ask():
         result = False
     return result
 
-def step_by_step ():
+def __step_by_step ():
     print (f"\n{'#'*10} Do you want to update the system? yes/no (YES)            {'#'*10}")
-    UPDATE_SYSTEM = ask()
+    UPDATE_SYSTEM = __ask()
     if (UPDATE_SYSTEM):
         ClientSSH.__run__(cmd, module.step1.update_system())
     
     print (f"\n{'#'*10} Do you want to install java? yes/no (YES)                 {'#'*10}")
-    INSTALL_JAVA = ask()
+    INSTALL_JAVA = __ask()
     if (INSTALL_JAVA):
         ClientSSH.__run__(cmd, module.step1.install_java())
 
     print (f"\n{'#'*10} Do you want to install the basic packages? yes/no (YES)   {'#'*10}")
-    INSTALL_BASIC_PACKAGES = ask()
+    INSTALL_BASIC_PACKAGES = __ask()
     if (INSTALL_BASIC_PACKAGES):
         ClientSSH.__run__(cmd, module.step1.install_packages())
 
     print (f"\n{'#'*10} Do you want to install Wazuh Manager? yes/no (YES)        {'#'*10}")
-    INSTALL_WAZUH_MANAGER = ask()
+    INSTALL_WAZUH_MANAGER = __ask()
     if (INSTALL_WAZUH_MANAGER):
         ClientSSH.__run__(cmd, module.step2.repo_wazuh())
         ClientSSH.__run__(cmd, module.step2.install_wazuh())
@@ -39,11 +39,11 @@ def step_by_step ():
         ClientSSH.__run__(cmd, module.step2.install_kibana())
 
     print (f"\n{'#'*10} Do you want to configuring the firewall? yes/no (YES)     {'#'*10}")
-    CONFIG_FIREWALL = ask()
+    CONFIG_FIREWALL = __ask()
     if (CONFIG_FIREWALL):
         ClientSSH.__run__(cmd, module.step2.config_firewall())
 
-def unattended():
+def __unattended():
     ClientSSH.__run__(cmd, module.step1.update_system())
     ClientSSH.__run__(cmd, module.step1.install_java())
     ClientSSH.__run__(cmd, module.step1.install_packages())
@@ -83,10 +83,10 @@ if __name__ == '__main__':
     option = input("Write (1) for a Step by Step installatio or write (2) for unattended installation: ")
     while True:
         if option == '1':
-            step_by_step()
+            __step_by_step()
             break
         elif option == '2':
-            unattended()
+            __unattended()
             break
         else:
             print (f"\n{'#'*10}            You must write a valid answer.                 {'#'*10}")
@@ -94,7 +94,7 @@ if __name__ == '__main__':
     
     ClientSSH.__clientSSHclose__(client)
 
-    print (f"\n{'#'*10}           Everything weas installed successfully          {'#'*10}")
+    print (f"\n{'#'*10}           Everything was installed successfully          {'#'*10}")
     print (f"\n{'#'*10}                           ENJOY                           {'#'*10}\n")
 
     webbrowser.open_new('https://documentation.wazuh.com/4.2/getting-started/')
