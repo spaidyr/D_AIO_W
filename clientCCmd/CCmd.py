@@ -5,15 +5,32 @@ from clientCCmd.Exceptions import Exceptions
 
 class CCmd(object):
 
-    ## Clase for command execution
+    ''' To inject commands is the objective of this class
+    '''
 
     def __init__(self, client):
+
+        ''' The builder method of this class instance differents attributes
+
+            Arguments:
+                client: Client SSH which it establish the connection between the user and the server
+
+            Attributes:
+                cmd_client: Client SSH which it establish the connection between the user and the server.
+                cmd_result: It will be the result of read the stdout of the Linux Terminal.
+                cmd_err: It will be the result of read the stderr of the Linux Terminal.
+                __SUDO_PASS: this string save the sudo password of the system while the application is execution.
+        '''
+
         self.cmd_client = client
         self.cmd_result = ''
         self.cmd_err = ''
         self.__SUDO_PASS = ''
 
     def __exec_cmd(self, user_cmd):
+
+        ''' This function execute each command that it is introduce from function run_cmd().
+        '''
 
         if ("sudo -S") in user_cmd:
             pass

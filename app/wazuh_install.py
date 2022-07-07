@@ -95,7 +95,7 @@ class Wazuh_Install():
     
     def install_kibana (self):
 
-        ''' Tis function install Kibana i the version 
+        ''' This function install Kibana i the version 
         '''
 
         self.COMMANDS = ['sudo yum install opendistroforelasticsearch-kibana -y',
@@ -115,11 +115,19 @@ class Wazuh_Install():
         return self.COMMANDS
     
     def config_firewall (self):
+
+        ''' This function configure the firewall of CentOS because by default, the server has configure the firewall for drop the traffic HTTPS
+        '''
+
         self.COMMANDS = ['sudo firewall-cmd --add-service=https',
                         'sudo firewall-cmd --runtime-to-permanent']
         return self.COMMANDS
 
     def repo_wazuh (self):
+
+        ''' This function make the file with the configuration of the repository of Wazuh v4
+        '''
+
         self.COMMANDS = ['touch wazuh.repo',
                         'echo "[wazuh]" >> wazuh.repo',
                         'echo "gpgcheck=1" >> wazuh.repo',
