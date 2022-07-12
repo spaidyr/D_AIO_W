@@ -3,13 +3,13 @@ from getpass import getpass
 
 class Wazuh_Install():
 
-    ''' The class Wazuh_Install load the configuration necesary for install Wazuh.
-        This object work in the Open Distro version of Elasticsearch
+    ''' The class Wazuh_Install loads the necesary configuration for installing Wazuh.
+        This object works in the Open Distro version of Elasticsearch
     '''
     
     def __init__(self):
 
-        ''' This function initialize de Object Wazuh_Install. This Object install and deploy the system Wazuh.
+        ''' This function initializes the Object Wazuh_Install. This Object installs and deploys the Wazuh system.
             This object will install the version All-in-One of Wazuh-Manager.
         '''
 
@@ -17,11 +17,11 @@ class Wazuh_Install():
 
     def install_wazuh(self):
 
-        ''' This function install wazuh manager in the version 4.2. After of the installation, this function
-            reload and initialize the services.
+        ''' This function installs Wazuh Manager in the version 4.2. After the installation, this function
+            reloads and initializes the services.
 
             Returns:
-                COMMANDS: List of commands in CentOS 7 wihich they are necessaries for install wazuh-manager
+                COMMANDS: List of commands in CentOS 7 wihich are necessary for installing wazuh-manager
         '''
         self.COMMANDS = ['sudo rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH',
                         'sudo yum install wazuh-manager-4.2.7-1 -y',
@@ -32,12 +32,12 @@ class Wazuh_Install():
     
     def install_elasticsearch(self):
 
-        ''' This function install Elasticsearch in the version Open Distro for Wazuh. This process install Elasticsearch and
-            create the security certificates which they implement security about the web navegation. This certificates permit
+        ''' This function installs Elasticsearch in the Open Distro version for Wazuh. This process installs Elasticsearch and
+            creates the security certificates which implement security for the web navegation. This certificates permit
             that the plataform works in HTTPS.
 
             Returns:
-                COMMANDS: List of commands in CentOS 7 wihich they are necessaries for install Elasticsearch.
+                COMMANDS: List of commands in CentOS 7 which are necessary for install Elasticsearch.
         '''
 
         self.COMMANDS = ['sudo yum install opendistroforelasticsearch-1.13.2-1 -y',
@@ -70,12 +70,12 @@ class Wazuh_Install():
 
     def install_filebeat (self):
 
-        ''' This function install Filebeat in the version 7.10 of Elasticsearch. Filebeat is necessary for wazuh works correctly.
-            This function take the certificates made in the function 'def install_elasticsearch()'. Filebeat wonn't work without
-            this certificates.
+        ''' This function installs Filebeat in the version 7.10 of Elasticsearch. Filebeat is necessary for wazuh to work correctly.
+            This function takes the certificates made in the function 'def install_elasticsearch()'. Filebeat won't work without
+            these certificates.
 
             Returns:
-                COMMANDS: List of commands in CentOS 7 wihich they are necessaries for install Filebeat.
+                COMMANDS: List of commands in CentOS 7 which are necessary for installing Filebeat.
         '''
 
         self.COMMANDS = ['sudo yum install filebeat-7.10.2-1 -y',
@@ -95,7 +95,7 @@ class Wazuh_Install():
     
     def install_kibana (self):
 
-        ''' This function install Kibana i the version 
+        ''' This function install Kibana in the Open Distro version.  
         '''
 
         self.COMMANDS = ['sudo yum install opendistroforelasticsearch-kibana -y',
@@ -116,7 +116,7 @@ class Wazuh_Install():
     
     def config_firewall (self):
 
-        ''' This function configure the firewall of CentOS because by default, the server has configure the firewall for drop the traffic HTTPS
+        ''' This function configures the firewall of CentOS to permit the incoming HTTPS traffic.
         '''
 
         self.COMMANDS = ['sudo firewall-cmd --add-service=https',
@@ -125,7 +125,7 @@ class Wazuh_Install():
 
     def repo_wazuh (self):
 
-        ''' This function make the file with the configuration of the repository of Wazuh v4
+        ''' This function makes the file with the configuration of the repository of Wazuh v4.
         '''
 
         self.COMMANDS = ['touch wazuh.repo',

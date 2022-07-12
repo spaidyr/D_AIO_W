@@ -4,8 +4,8 @@ from app.wazuh_install import Wazuh_Install
 class App_Install:
 
     ''' 
-    The class App_Install initialize the objects which they 
-    will load the necesary configuration for deploy the tool
+    The class App_Install initializes the objects which 
+    load the necesary configuration to deploy the tool
     '''
     
     def __init__(self) -> None:

@@ -1,17 +1,17 @@
 class First_config():
 
-    ''' The class First_config initialize the basic configuration of the system '''
+    ''' The class First_config initializes the basic configuration of the system '''
     
     def __init__(self):
 
-        ''' This function Initialize te object type First_config.
+        ''' This function initializes the object type First_config.
         '''
 
         self.COMMANDS = ['']
 
     def update_system(self):
 
-        ''' This function update de system
+        ''' This function updates the system
         '''
 
         self.COMMANDS = ['sudo yum update -y']
@@ -19,8 +19,8 @@ class First_config():
 
     def install_java(self):
 
-        ''' This function install and configure Java.
-            Java is necessary for install the Elastic STACK
+        ''' This function installs and configures Java.
+            Java is necessary for installing the Elastic STACK
         '''
 
         self.COMMANDS = ['sudo yum install java-11-openjdk-devel -y',
@@ -34,7 +34,7 @@ class First_config():
     
     def install_packages(self):
 
-        ''' This section install the different packets which they are necessary for the system works correctly.
+        ''' This section installs the different packets which are necessary for the system to work correctly.
         '''
 
         self.COMMANDS = ['sudo yum install curl unzip wget libcap -y']

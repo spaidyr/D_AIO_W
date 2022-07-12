@@ -38,7 +38,7 @@ def __step_by_step ():
         ClientSSH.__run__(cmd, module.step2.install_filebeat())
         ClientSSH.__run__(cmd, module.step2.install_kibana())
 
-    print (f"\n{'#'*10} Do you want to configuring the firewall? yes/no (YES)     {'#'*10}")
+    print (f"\n{'#'*10} Do you want to configure the firewall? yes/no (YES)     {'#'*10}")
     CONFIG_FIREWALL = __ask()
     if (CONFIG_FIREWALL):
         ClientSSH.__run__(cmd, module.step2.config_firewall())
@@ -57,30 +57,30 @@ def __unattended():
 
 if __name__ == '__main__':
    
-    print (f"\n{'#'*10}                 Welcome to Installer Wazuh                {'#'*10}")
-    print (f"\n{'#'*10} Firstly, you must choice which modules yo want to install {'#'*10}")
-    print (f"\n{'#'*10}    After that, the installation process will guide you    {'#'*10}")
-    print (f"\n{'#'*10}                 through the different steps               {'#'*10}\n")
+    print (f"\n{'#'*10}                 Welcome to Wazuh Installer                 {'#'*10}")
+    print (f"\n{'#'*10} Firstly, you must choose which modules you want to install {'#'*10}")
+    print (f"\n{'#'*10}    After that, the installation process will guide you     {'#'*10}")
+    print (f"\n{'#'*10}                 through the different steps                {'#'*10}\n")
 
-    print (f"\n{'#'*10} What is the IP of the server where you want deploy Wazuh? {'#'*10}")
+    print (f"\n{'#'*10} What is the IP of the server where you want deploy Wazuh?  {'#'*10}")
     HOST = input("Enter the IP: ")
     while True:
         result = input ("Is the IP %s correct? yes/no (YES): " %{HOST}).lower()
         if (result == 'yes' or result == ''):
             break
         elif (result == 'no'):
-            HOST = input("Enter the IP correct: ")
+            HOST = input("Enter the correct IP: ")
         else:
             print ('Enter a valid answer')
 
     print (f"\n{'#'*10}   The SSH connection to the server will be established    {'#'*10}")
-    print (f"\n{'#'*10}    Enter User and Password to complete the connection     {'#'*10}\n")
+    print (f"\n{'#'*10}  Enter Username and Password to complete the connection   {'#'*10}\n")
 
     client, cmd = ClientSSH.__clientSSH__(HOST)
     module = App_Install()
 
-    print (f"\n{'#'*10}   Do you want Step by Step o Unattended installation?     {'#'*10}\n")
-    option = input("Write (1) for a Step by Step installatio or write (2) for unattended installation: ")
+    print (f"\n{'#'*10}   Do you want Step by Step or Unattended installation?     {'#'*10}\n")
+    option = input("Write (1) for a Step by Step installation or write (2) for unattended installation: ")
     while True:
         if option == '1':
             __step_by_step()
@@ -90,7 +90,7 @@ if __name__ == '__main__':
             break
         else:
             print (f"\n{'#'*10}            You must write a valid answer.                 {'#'*10}")
-            option = input("Write (1) for a Step by Step installatio or write (2) for unattended installation: ")
+            option = input("Write (1) for a Step by Step installation or write (2) for unattended installation: ")
     
     ClientSSH.__clientSSHclose__(client)
 

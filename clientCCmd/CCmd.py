@@ -10,16 +10,16 @@ class CCmd(object):
 
     def __init__(self, client):
 
-        ''' The builder method of this class instance differents attributes
+        ''' This method builds the object with different attributes.
 
             Arguments:
-                client: Client SSH which it establish the connection between the user and the server
+                client: It is the client which establishes the connection between the user and the server.
 
             Attributes:
-                cmd_client: Client SSH which it establish the connection between the user and the server.
-                cmd_result: It will be the result of read the stdout of the Linux Terminal.
-                cmd_err: It will be the result of read the stderr of the Linux Terminal.
-                __SUDO_PASS: this string save the sudo password of the system while the application is execution.
+                cmd_client: It is the client which establishes the connection between the user and the server.
+                cmd_result: It will be the result of reading the stdout of the Linux Terminal.
+                cmd_err: It will be the result of reading the stderr of the Linux Terminal.
+                __SUDO_PASS: this string saves the sudo password of the system while the application is executing.
         '''
 
         self.cmd_client = client
@@ -29,7 +29,7 @@ class CCmd(object):
 
     def __exec_cmd(self, user_cmd):
 
-        ''' This function execute each command that it is introduce from function run_cmd().
+        ''' This function executes each command that is introduced from function run_cmd().
         '''
 
         if ("sudo -S") in user_cmd:
@@ -50,7 +50,7 @@ class CCmd(object):
                         self.__SUDO_PASS = ''
                     Exceptions.__cmdError__(self, user_cmd)                      
         except paramiko.PasswordRequiredException:
-            print('Password requerida')
+            print('Password is necessary')
             
     def get_cmd_result(self):
         return self.cmd_result
