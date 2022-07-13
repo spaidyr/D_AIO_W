@@ -5,6 +5,10 @@ import webbrowser
 HOST = '127.0.0.1'
 
 def __ask():
+
+    ''' This function checks the answer of the user to continue the installation
+    '''
+
     result = True
     answer = input('Enter your answer: ').lower()
     while (answer != 'yes' and answer != '' and answer != 'no'):
@@ -14,6 +18,10 @@ def __ask():
     return result
 
 def __step_by_step ():
+
+    ''' This function perform step by step installation of the modules
+    '''
+
     print (f"\n{'#'*10} Do you want to update the system? yes/no (YES)            {'#'*10}")
     UPDATE_SYSTEM = __ask()
     if (UPDATE_SYSTEM):
@@ -44,6 +52,10 @@ def __step_by_step ():
         ClientSSH.__run__(cmd, module.step2.config_firewall())
 
 def __unattended():
+
+    ''' This function perform unattended installation of the modules
+    '''
+
     ClientSSH.__run__(cmd, module.step1.update_system())
     ClientSSH.__run__(cmd, module.step1.install_java())
     ClientSSH.__run__(cmd, module.step1.install_packages())

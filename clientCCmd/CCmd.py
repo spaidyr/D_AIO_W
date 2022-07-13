@@ -53,9 +53,16 @@ class CCmd(object):
             print('Password is necessary')
             
     def get_cmd_result(self):
+
+        ''' This function shows the result of reading the stdout of the Linux Terminal.
+        '''
+
         return self.cmd_result
 
     def run_cmd(self, __cmd):
+
+        ''' This function checks the length of the string __cmd
+        '''
 
         if len(__cmd):
             self.__exec_cmd(__cmd)
@@ -64,6 +71,9 @@ class CCmd(object):
             sys.exit(1)           
 
     def __sudo_cmd(self, __sudoCmd):
+
+        ''' This method rewrites the command sudo
+        '''
 
         if not self.__SUDO_PASS:
             self.__SUDO_PASS = getpass('Enter your Sudo Password: ')

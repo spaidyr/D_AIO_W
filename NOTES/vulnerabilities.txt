@@ -1,6 +1,0 @@
-INSTALL vulnerabilities Wazuh
-
-https://documentation.wazuh.com/current/user-manual/capabilities/vulnerability-detection/running-vu-scan.html
-
-	- Agregar la configuración al agente.conf del grupo en la web
-	- poner a "yes" las vulnerabilities dentro del ossec.conf del wazuh-manager (servidor CentOS7)
